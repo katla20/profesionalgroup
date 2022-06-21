@@ -1,0 +1,41 @@
+[
+    {
+        "EYEBROWS":"",
+        "EYELINER":"",
+        "LIPS":"PINK",
+        "OTHERS":"",
+        "TOUCH UP":""
+    }
+    ,{
+        "EYEBROWS":false,"EYELINER":false,"MICROLIPS":true
+    }
+    ,{"KELOID SCARRING":false,
+      "ALCOHOLISM":false,
+      "ACTIVE HEMATOLOGIC DISEASE":false,
+      "ALLERGIES":false,
+      "DIABETES":false,
+      "TATTOOS":false,
+      "EPILEPSY":false,
+      "HERPES":false,
+      "STEROID USE":false,
+      "CANCER":false,
+      "USE OF ANTICOAGULANTS":false,
+      "HEPATITIS":false,
+      "ASPIRIN USE":false,
+      "COUMARIN":false,
+      "AIDS":false,
+      "AUTOIMMUNE DISEASE":false,
+      "BE PREGNANT":false,
+      "HEMATOLOGIC DISEASE":false,
+      "USE ACCUSANT":false,
+      "PLANNING PLASTIC SURGERIES":false,
+      "YOU TAKE IRON":false,
+      "USE RETINA":false,
+      "BE IN MEDICAL TREATMENT":false,
+      "HEMOPHILIA":false,
+      "WEAR CONTACT LENSES":false,
+      "DYE YOUR HAIR":false,
+      "HEART DISEASE":false,
+      "TAKE ANY MEDICATION":false,
+      "OTHER":false}
+]
