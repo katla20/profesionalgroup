@@ -94,17 +94,6 @@ class Clients extends Component
     {
 		
         $record = Client::findOrFail($id);
-		//dd($record);
-        /*$this->selected_id = $id; 
-		$this->email = $record-> email;
-		$this->fullname = $record-> fullname;
-		$this->occupation = $record-> occupation;
-		$this->address = $record-> address;
-		$this->citycode = $record-> citycode;
-		$this->phone = $record-> phone;
-		$this->bob = $record-> bob;
-		$this->knowabout = $record-> knowabout;
-		//$this->updateMode = true;*/
 		
 		return view('livewire.clients.update_wm',
 			['client'=>$record]
@@ -112,25 +101,6 @@ class Clients extends Component
 		
         
     }
-
-	public function updatenew(Request $request,$id){
-		//dd($request->all());
-		$record = Client::find($id);
-
-		$validator = Validator::make($request->all());
-
-		if ($validator->fails()) // on validator found any error 
-		{
-		   return redirect()->withErrors($validator)->withInput();
-		}
-
-		if($record){
-
-			$record->fill($request->all());
-			$record->save();
-			return $this->render();
-		}
-	}
 
     public function update(Request $request,$id)
     {

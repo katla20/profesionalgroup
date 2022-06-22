@@ -6,71 +6,60 @@
 				<div class="card-header">
 					<div style="display: flex; justify-content: space-between; align-items: center;">
 						<div class="float-left">
-							<h4><i class="fab fa-laravel text-info"></i>
-							Client Listing </h4>
+							<h4><x-vaadin-user-star style="color: #374151; width:18px;height:18px;"/>
+							Clients</h4>
 						</div>
-						<div wire:poll.60s>
+						<!--<div wire:poll.60s>
 							<code><h5>{{ now()->format('H:i:s') }} UTC</h5></code>
-						</div>
+						</div>-->
 						@if (session()->has('message'))
 						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
 						@endif
 						<div>
-							<input wire:model='keyWord' type="text" class="form-control" name="search" id="search" placeholder="Search Clients">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-search"></i></span>
+								</div>
+								<input wire:model='keyWord' type="search" class="form-control border-left-0 border" name="search" id="search" placeholder="Search..">
+							</div>
 						</div>
-						<a class="navbar-brand" href="{{ route('clients_.create') }}">
-							<i class="fa fa-plus"></i>Add Clients II
-						</a>
-						<div class="btn btn-sm btn-info" data-toggle="modal" data-target="#createDataModal">
-						<i class="fa fa-plus"></i>  Add Clients
-						</div>
+						<!--<a class="navbar-brand" href="{{ route('clients_.create') }}">
+							<i class="fa fa-plus"></i>
+						</a>-->
 					</div>
 				</div>
 				
 				<div class="card-body">
-						@include('livewire.clients.create')
-						@include('livewire.clients.update')
 				<div class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
 							<tr> 
-								<td>#</td> 
+								<td></td> 
 								<th>Email</th>
 								<th>Fullname</th>
-								<th>Ci</th>
-								<th>Ocupation</th>
-								<th>Address</th>
-								<th>City</th>
-								<th>Zipcode</th>
 								<th>Phone</th>
-								<th>Bob</th>
-								<td>ACTIONS</td>
+								<th>Dob</th>
+								
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($clients as $row)
 							<tr>
-								<td>{{ $loop->iteration }}</td> 
+								<td width="90">
+									<div class="btn-group">
+										<button type="button" class="btn btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<span class="fa fa-ellipsis-h text-info"></span>
+										</button>
+										<div class="dropdown-menu dropdown-menu-right">
+										<!--<a class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Edit </a>-->							 
+										<a class="dropdown-item" onclick="confirm('Confirm Delete Client id {{$row->id}}? \nDeleted Clients cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Delete </a>   
+										</div>
+									</div>
+								</td>
 								<td>{{ $row->email }}</td>
 								<td>{{ $row->fullname }}</td>
-								<td>{{ $row->ci }}</td>
-								<td>{{ $row->ocupation }}</td>
-								<td>{{ $row->address }}</td>
-								<td>{{ $row->city }}</td>
-								<td>{{ $row->zipcode }}</td>
-								<td>{{ $row->phone }}</td>
-								<td>{{ $row->bob }}</td>
-								<td width="90">
-								<div class="btn-group">
-									<button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Actions
-									</button>
-									<div class="dropdown-menu dropdown-menu-right">
-									<a data-toggle="modal" data-target="#updateModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit"></i> Edit </a>							 
-									<a class="dropdown-item" onclick="confirm('Confirm Delete Client id {{$row->id}}? \nDeleted Clients cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i> Delete </a>   
-									</div>
-								</div>
-								</td>
+								<td>{{ (isset($row->phone))? $row->phone : 'NA' }}</td>
+								<td>{{ $row->dob }}</td>
 							@endforeach
 						</tbody>
 					</table>						

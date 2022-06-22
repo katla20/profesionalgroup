@@ -28,8 +28,7 @@
 					</div>
                     <div class="col-md-3 m-3">
                         <div class="card card-section border-info text-info p-3 text-center" >
-							<!--<a href="{{ url('/clients') }}" class="nav-link">-->
-                            <a href="#" class="nav-link">
+							<a href="{{ url('/clients') }}" class="nav-link">
                                 <h4>Search Client</h4>
                             </a> 
                         </div>

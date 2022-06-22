@@ -31,10 +31,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 	Route::resource('clients_', App\Http\Livewire\Clients::class)->middleware('auth');
 
-	Route::controller(App\Http\Livewire\Clients::class)->group(function () {
-		Route::put('clients_/update_/{clients_}', 'updatenew')->name('clients_.updatenew');
-	});
-
 	Route::resource('authorizations_', App\Http\Livewire\Authorizations::class)->middleware('auth');
 	
 	Route::controller(App\Http\Livewire\Authorizations::class)->group(function () {

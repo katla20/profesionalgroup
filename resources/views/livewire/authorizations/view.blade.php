@@ -23,8 +23,6 @@
 				</div>
 				
 				<div class="card-body">
-						@include('livewire.authorizations.create')
-						@include('livewire.authorizations.update')
 				<div class="table-responsive">
 					<table class="table table-bordered table-sm">
 						<thead class="thead">
