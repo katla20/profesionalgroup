@@ -29,7 +29,6 @@ body {
 ul {
 	list-style-type: none;
    /* border: 1px solid black;*/
-    padding-top: 0px;
 }
 
 table {
@@ -41,6 +40,7 @@ table {
     span{
         text-transform: uppercase;
         font-size: 0.6em;
+        font-family: 'dejavu sans'
     }
 
     li {
@@ -51,6 +51,8 @@ table {
     }
     .color-input{
         background-color: #b5b4b1;
+        padding-right: 4px;
+        padding-left: 4px;
         
     }
     .container{
@@ -65,7 +67,6 @@ table {
     }
     .legend{
         text-transform: uppercase;
-        font-weight: 800;
         margin-left: 5px;
 
 
@@ -93,7 +94,7 @@ table {
     }
 
     p{
-        font-size: 0.6em;
+        font-size: 0.5.5em;
         text-align: justify;
         line-height: normal;
     }
@@ -110,23 +111,23 @@ table {
 <body>
     <div class="container">
         <div class="legend" style="margin-top: 25px;margin-bottom: 25px;">
-            <center><span>{{ __('MICROPIGMENTATION') }}</span></center>
+            <center><strong><span>{{ __('MICROPIGMENTATION') }}</span></strong></center>
             <img class="logo" 
                 src="{{ $authDetails['user']['logo_base64']}} " />
         </div>
         <div class="legend">
-            <span>{{ __('CONTACT DETAILS') }}</span>
+            <strong><span>{{ __('CONTACT DETAILS') }}</span></strong>
         </div>
         <hr>
         <div>
-            <ul style="padding-top: 10px;">
+            <ul style="padding-top: 8px;">
                 <li>
                     <span>{{ __('Date') }}</span>
-                    <span class="color-input">{{$authDetails['proceeded_date']}}</span>
+                    <span class="color-input">{{ date('d-M-y', strtotime($authDetails['proceeded_date'])) }}</span>
                 </li>
                 <li>
                     <span>{{ __('DOB') }}</span>
-                    <span class="color-input">{{ isset($authDetails['client']['dob']) ? $authDetails['client']['dob'] : '_______' }}</span>
+                    <span class="color-input">{{ isset($authDetails['client']['dob']) ? date('d-M-y', strtotime($authDetails['client']['dob'])) : '_______' }}</span>
                 </li>
                 <li>
                     <span>{{ __('Age') }}</span>
@@ -172,11 +173,11 @@ table {
         </div>
         <hr>
         <div class="legend">
-            <span>{{ __('Reason for Consultation') }}</span>
+            <strong><span>{{ __('Reason for Consultation') }}</span></strong>
         </div>
         <hr>
         <div>
-            <ul>
+            <ul style="padding-top: 2px;padding-bottom: 4px;">
             @foreach ($authDetails['reason'] as $key => $value)
                 <li>
                     <span class="color-input">{{$key}}</span>
@@ -186,15 +187,15 @@ table {
         </div>
         @isset($authDetails['history'])
         <hr>
-        <div class="legend">
-            <span>{{ __('PATHOLOGICAL HISTORY') }}</span>
+        <div>
+            <strong><span class="legend">{{ __('PATHOLOGICAL HISTORY') }}</span></strong>
         </div>
-        <div class="legend" style="font-size: 0.65em;">
-            <span>{{ __('BEAR IN MIND THAT THOSE THAT APPEAR WHIT * ARE CONTRAINDICATIONS') }}</span>
+        <div>
+            <span style="font-size: 0.5em;margin-left: 5px;">{{ __('BEAR IN MIND THAT THOSE THAT APPEAR WHIT * ARE CONTRAINDICATIONS') }}</span>
         </div>
         <hr>
         <div>
-            <ul>
+            <ul style="padding-top: 8px;">
             @foreach ($authDetails['history'] as $key => $value)
                 <li>
                     <span class="color-input">{{$key}}</span>
@@ -205,15 +206,15 @@ table {
         @endisset
         <hr>
         <div>
-            <span class="legend">{{ __('PHYSICAL EXAM') }}</span>
+            <strong><span class="legend">{{ __('PHYSICAL EXAM') }}</span></strong>
         </div>
         <hr>
         <div style="margin-left:5px;">
-            <span>{{ __('SKIN TIPE:') }}</span><span class="color-input">{{$authDetails['skin_type']}}</span>
+            <span>{{ __('SKIN TYPE: ') }}</span><span class="color-input">{{$authDetails['skin_type']}}</span>
         </div>
         <hr>
         <div>
-            <span class="legend">{{ __('COLOR USED') }}</span>
+            <strong><span class="legend">{{ __('COLOR USED') }}</span></strong>
         </div>
         <hr>
         <div>
@@ -264,7 +265,7 @@ table {
             </p>
         </div>
         <div style=margin-bottom:5px">
-            <center><span class="legend">{{ __('AUTHORIZATION FOR PROCEDURES') }}</span></center>
+            <center><strong><span class="legend">{{ __('AUTHORIZATION FOR PROCEDURES') }}</span></strong></center>
         </div>
         <div style="margin-bottom: 10px" class="div_terms">
             <p style="">
@@ -285,7 +286,7 @@ table {
         </div>
         <hr>
         <div style=margin-bottom:5px">
-            <center><span class="legend">{{ __('CLIENT CONSENT FOR TREATMENT') }}</span></center>
+            <center><strong><span class="legend">{{ __('CLIENT CONSENT FOR TREATMENT') }}</span></strong></center>
         </div>
         <div style="margin-bottom: 10px;" class="div_terms">
             <p style="">
@@ -315,14 +316,14 @@ table {
                     </li>
                     <li>
                         <span>{{ __('DATE') }}:</span>
-                        <span class="legend">{{$authDetails['proceeded_date']}}</span>
+                        <span class="legend">{{ date('d-M-y', strtotime($authDetails['proceeded_date'])) }}</span>
                     </li>
                 </ul>
             </div>
         </div>
         <hr>
         <div style=margin-bottom:5px,margin-top:10px">
-            <center><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></center>
+            <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
         </div>
         <div style="margin-bottom: 10px" class="div_terms">
             <p style="">

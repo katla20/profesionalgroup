@@ -9,6 +9,7 @@ use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 
 class Authorizations extends Component
@@ -21,6 +22,17 @@ class Authorizations extends Component
 	$history, $history_specify,$reason, $color_observation, $color_eyebrows, $color_eyerline, $color_lips, $color_other, $color_touchup ;
 	public $email, $fullname, $ci, $occupation, $address, $citycode, $phone, $dob ,$knowabout;
     public $updateMode = false;
+
+	protected $rules = [
+				'skin_type' => 'required',
+				'reason' => 'required',
+				'proceeded_date' => 'required',
+				'dob' => 'required',
+				'email' => 'required|email|unique:clients',
+				'fullname' => 'required',
+				'signature_client'=>'required',
+				'cost_treatment'=>'required'
+			];
 
     public function render()
     {
@@ -87,38 +99,30 @@ class Authorizations extends Component
     }
 
 	public function save(Request $request){
+		Validator::make($request->all(), [
+			'skin_type' => 'required',
+			'reason' => 'required',
+			'proceeded_date' => 'required',
+			'dob' => 'required',
+			'email' => 'required|email|unique:clients',
+			'fullname' => 'required',
+			'signature_client'=>'required',
+			'cost_treatment'=>'required'
+		])->validate();
 
-			$validator = Validator::make($request->all(), [
-				'skin_type' => 'required',
-				'reason' => 'required',
-				'proceeded_date' => 'required',
-				'dob' => 'required',
-				'email' => 'required|email|unique:clients',
-				'fullname' => 'required',
-				'signature_client'=>'required',
-				'cost_treatment'=>'required'
-			]);
+		try {
 
-			if ($validator->fails()) {
+			$client = $this->saveClient($request);
 
-				//dd($validator);
-				/*return redirect('authorizations_/create')
-							->withErrors($validator)
-							->withInput();*/
-				return response()->json(['error'=>$validator->errors()]);
-				
-			}else{
-
-				$client = $this->saveClient($request);
-
-				if($client){
-					$authorization = $this->saveAuthorization($request,$client);
-				}
-
+			if($client){
+				$authorization = $this->saveAuthorization($request,$client);
 			}
 
-			return $this->pdf($authorization->id);
-			
+		}catch (\Exception $e) {
+			return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+		}
+
+		return $this->pdf(5);
 	}
 
 	public function saveAuthorization($request,$client){
@@ -167,7 +171,7 @@ class Authorizations extends Component
 	public function pdf($authorization){
 
 		
-	    $fileName = 'microblandin-'.$authorization;
+	    $fileName = "microblanding-".$authorization;
 		$pdf = app('dompdf.wrapper');
 		$pdf->setOptions(['setBasePath'=> public_path()]);
 
@@ -184,8 +188,8 @@ class Authorizations extends Component
 		//dd($authDetails);
 
 		$pdf->loadView('livewire.authorizations.pdf', compact('authDetails'));
-		return $pdf->stream($fileName.'.pdf');
-		//return $pdf->download($fileName.'.pdf')
+	    return $pdf->stream($fileName.'.pdf');
+		//return $pdf->download($fileName.'.pdf');
 	}
 	
     public function cancel()

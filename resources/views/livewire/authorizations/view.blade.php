@@ -16,9 +16,6 @@
 								<input wire:model='keyWord' type="search" class="form-control border-left-0 border" name="search" id="search" placeholder="Search..">
 							</div>
 						</div>
-						<!--<div class="btn btn-sm btn-info" data-toggle="modal" data-target="#createDataModal">
-						<i class="fa fa-plus"></i>  Add Authorizations
-						</div>-->
 						<a class="navbar-brand" href="{{ route('authorizations_.create') }}">
 							<i class="fa fa-plus" id="icon-add"></i>
 						</a>

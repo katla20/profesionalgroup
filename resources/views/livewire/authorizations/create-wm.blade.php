@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row bg-white">
-        <a href="{{ url('/authorizations') }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button" ><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></a>
+        <a href="{{ URL::previous() }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button"><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></i></a>
         <div class="col-md-8 offset-md text-center">
             <h4>Microblanding</h4>
             <hr class="my-8">
@@ -14,52 +14,52 @@
                     @csrf
                 <div class="form-group col-md-6">
                   <label for="proceeded_date" class="form-label"><font style="vertical-align: inherit;">Date</font></label>
-                  <input wire:model="proceeded_date" type="date" name="proceeded_date" id="proceeded_date" class="form-control" value="{{ now()->toDateString('Y-m-d')}}" required>
+                  <input wire:model="proceeded_date" type="date" name="proceeded_date" id="proceeded_date" class="form-control" value="{{ now()->toDateString('Y-m-d')}}" value="{{ old('proceeded_date') }}">@error('proceeded_date') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group col-12">
                     <label for="name" class="form-label"><font style="vertical-align: inherit;">Full name</font></label>
-                    <input wire:model="fullname" type="text" name="fullname" class="form-control" id="fullname" required>
+                    <input wire:model="fullname" type="text" name="fullname" class="form-control" id="fullname" value="{{ old('fullname') }}">@error('fullname') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="form-group col-12">
                     <label for="dob" class="form-label"><font style="vertical-align: inherit;">DOB</font></label>
-                    <input wire:model="dob" type="date" name="dob" class="form-control" id="dob" required>
+                    <input wire:model="dob" type="date" name="dob" class="form-control" id="dob" value="{{ old('dob') }}">
                 </div>
                 <div class="form-group col-12">
                   <label for="occupation" class="form-label">
                     <font style="vertical-align: inherit;">Occupation</font>
                     <small class="text-muted">optional</small>
                   </label>
-                  <input type="text" wire:model="occupation" name="occupation" class="form-control" id="occupation" placeholder="">
+                  <input type="text" wire:model="occupation" name="occupation" class="form-control" id="occupation" placeholder="" value="{{ old('occupation') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="email" class="form-label"><font style="vertical-align: inherit;">Email</font></label>
-                    <input type="text" class="form-control" wire:model="email" id="email" name="email" required >
+                    <input type="text" class="form-control" wire:model="email" id="email" name="email" value="{{ old('email') }}">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>               
                 <div class="form-group col-12">
                     <label for="phonenumber" class="form-label">
                         <font style="vertical-align: inherit;">Number Phone</font>
                     </label>
-                  <input type="number" class="form-control"  wire:model="phonenumber" id="phonenumber" name="phonenumber">
+                  <input type="number" class="form-control"  wire:model="phonenumber" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="address" class="form-label">
                         <font style="vertical-align: inherit;">Address</font>
                         <small class="text-muted">optional</small>
                     </label>
-                  <input type="text" wire:model="address" name="address" class="form-control" id="address" >
+                  <input type="text" wire:model="address" name="address" class="form-control" id="address" value="{{ old('address') }}" >
                 </div>
                 <div class="form-group col-12">
                     <label for="citycode" class="form-label">
                         <font style="vertical-align: inherit;">City and Zip Code</font>
                     </label>
-                  <input type="text" class="form-control" wire:model="citycode" id="citycode" name="citycode">
+                  <input type="text" class="form-control" wire:model="citycode" id="citycode" name="citycode" value="{{ old('citycode') }}">
                 </div> 
                 <div class="form-group col-12">
                     <label for="knowabout" class="form-label">
                         <font style="vertical-align: inherit;">Know about us by</font>
                         <small class="text-muted">optional</small>
                     </label>
-                    <select class="form-control" wire:model="knowabout" name="knowabout" id="knowabout">
+                    <select class="form-control" wire:model="knowabout" name="knowabout" id="knowabout" value="{{ old('knowabout') }}">
                         <option value="">Choose...</option>
                         <option value="1">Through a friend</option>
                         <option value="0">Social media</option>
@@ -79,19 +79,19 @@
                           <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="checkbox"  wire:model="reason[eyebrows]" id="eyebrows" name="reason[eyebrows]" value="eyebrows" aria-label="..."></div>
+                                    <div class="d-flex align-items-start"><input class="form-check-input" type="checkbox"  wire:model="reason[eyebrows]" id="eyebrows" name="reason[eyebrows]" value="eyebrows" aria-label="..." {{ (is_array(old('reason')) && in_array('eyebrows', old('reason'))) ? ' checked' : '' }}></div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="eyebrows">eyebrows</label></div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start" ><input class="form-check-input" type="checkbox" wire:model="reason[eyeliner]" id="eyeliner" name="reason[eyeliner]" value="eyeliner" aria-label="..."></div>
+                                    <div class="d-flex align-items-start" ><input class="form-check-input" type="checkbox" wire:model="reason[eyeliner]" id="eyeliner" name="reason[eyeliner]" value="eyeliner" aria-label="..." {{ (is_array(old('reason')) && in_array('eyeliner', old('reason'))) ? ' checked' : '' }}></div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="eyeliner">eyeliner</label></div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="checkbox" id="microlips" wire:model="reason[microlips]" name="reason[microlips]" value="microlips" aria-label="..."></div>
+                                    <div class="d-flex align-items-start"><input class="form-check-input" type="checkbox" id="microlips" wire:model="reason[microlips]" name="reason[microlips]" value="microlips" aria-label="..." {{ (is_array(old('reason')) && in_array('microlips', old('reason'))) ? ' checked' : '' }}></div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="microlips">microlips</label></div>
                                 </div>
                             </li>
@@ -114,7 +114,7 @@
                                 @foreach ($history as $key => $value)
                                     <li class="list-group-item">
                                         <div class="d-flex flex-row form-check form-check-inline">
-                                            <div class="d-flex align-items-start"><input class="form-check-input" wire:model="history[{{$key}}]" type="checkbox" id="{{ $key }}" name="history[{{$key}}]" value="{{ $key }}" aria-label="..."></div>
+                                            <div class="d-flex align-items-start"><input class="form-check-input" wire:model="history[{{$key}}]" type="checkbox" id="{{ $key }}" name="history[{{$key}}]" value="{{ $key }}" aria-label="..." {{ (is_array(old('history')) && in_array($key, old('history'))) ? ' checked' : '' }}></div>
                                             <div class="d-flex align-items-end"><label class="form-check-label" for="{{ $key }}">{{ $value }}</label></div>
                                         </div>
                                     </li>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="col-12">
                     <label for="specify" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Specify</font></font></label>
-                    <input type="text" class="form-control" wire:model="specify" id="specify" placeholder="Insert your Pathology" name="specify">
+                    <input type="text" class="form-control" wire:model="specify" id="specify" placeholder="Insert your Pathology" name="specify" value="{{ old('specify') }}">
                 </div>
                 
                 <small class="text-muted">If you suffer of any above, your procedure will be suspended according to each case.</small>
@@ -140,25 +140,33 @@
                           <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="radio" id="normal" name="skin_type" value="normal" aria-label="..."></div>
+                                    <div class="d-flex align-items-start">
+                                        <input class="form-check-input" type="radio" id="normal" name="skin_type" value="normal" aria-label="..." {{ old('skin_type') == 'normal' ? 'checked' : '' }}>
+                                    </div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="normal">normal</label></div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="radio" id="dry" name="skin_type" value="dry" aria-label="..."></div>
+                                    <div class="d-flex align-items-start">
+                                        <input class="form-check-input" type="radio" id="dry" name="skin_type" value="dry" aria-label="..." {{ old('skin_type') == 'dry' ? 'checked' : '' }}>
+                                    </div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="dry">dry</label></div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="radio" id="oily" name="skin_type" value="oily" aria-label="..."></div>
+                                    <div class="d-flex align-items-start">
+                                        <input class="form-check-input" type="radio" id="oily" name="skin_type" value="oily" aria-label="..." {{ old('skin_type') == 'oily' ? 'checked' : '' }}>
+                                    </div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="oily">oily</label></div>
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-flex flex-row form-check form-check-inline">
-                                    <div class="d-flex align-items-start"><input class="form-check-input" type="radio" id="mixed" name="skin_type" value="mixed" aria-label="..."></div>
+                                    <div class="d-flex align-items-start">
+                                        <input class="form-check-input" type="radio" id="mixed" name="skin_type" value="mixed" aria-label="..."  {{ old('skin_type') == 'mixed' ? 'checked' : '' }}>
+                                    </div>
                                     <div class="d-flex align-items-end"><label class="form-check-label" for="mixed">mixed</label></div>
                                 </div>
                             </li>
@@ -171,27 +179,27 @@
                 <h4>Color used:</h4>
                 <div class="form-group col-12">
                     <label for="color_eyebrows" class="form-label"><font style="vertical-align: inherit;">Eyebrows</font></label>
-                    <input type="text" class="form-control" id="color_eyebrows" name="color_eyebrows" wire:model="color_eyebrows">
+                    <input type="text" class="form-control" id="color_eyebrows" name="color_eyebrows" wire:model="color_eyebrows" value="{{ old('color_eyebrows') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="color_eyerline" class="form-label"><font style="vertical-align: inherit;">Eyerline</font></label>
-                    <input type="text" class="form-control" id="color_eyerline" name="color_eyerline" wire:model="color_eyerline">
+                    <input type="text" class="form-control" id="color_eyerline" name="color_eyerline" wire:model="color_eyerline" value="{{ old('color_eyerline') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="color_lips" class="form-label"><font style="vertical-align: inherit;">Lips</font></label>
-                    <input type="text" class="form-control" id="color_lips" name="color_lips" wire:model="color_lips">
+                    <input type="text" class="form-control" id="color_lips" name="color_lips" wire:model="color_lips" value="{{ old('color_lips') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="color_touchup" class="form-label"><font style="vertical-align: inherit;">Touch Up</font></label>
-                    <input type="text" class="form-control" id="color_touchup" name="color_touchup" wire:model="color_touchup">
+                    <input type="text" class="form-control" id="color_touchup" name="color_touchup" wire:model="color_touchup" value="{{ old('color_touchup') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="color_other" class="form-label"><font style="vertical-align: inherit;">Other</font></label>
-                    <input type="text" class="form-control" id="color_other" name="color_other">
+                    <input type="text" class="form-control" id="color_other" name="color_other" value="{{ old('color_other') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="color_observation" class="form-label"><font style="vertical-align: inherit;">Observations</font></label>
-                    <input type="text" class="form-control" id="color_observation" name="color_observation">
+                    <input type="text" class="form-control" id="color_observation" name="color_observation" value="{{ old('color_observation') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="cost_treatment" class="form-label">
@@ -201,8 +209,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">$</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Cost Treatment" aria-label="Cost Treatment" id="cost_treatment" name="cost_treatment" required>
+                        <input type="text" class="form-control" placeholder="Cost Treatment" aria-label="Cost Treatment" id="cost_treatment" name="cost_treatment">
                     </div>
+                    @error('cost_treatment') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-12">
                     <small class="text-muted">Client's signature</small>
@@ -221,7 +230,7 @@
                     
                     <div class="form-check">
                         <br/>
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" name="invalidCheck" required>
                         <input type="hidden" name="signature_client" id="signature_client">
                         <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
                         <div class="invalid-feedback">
@@ -236,6 +245,7 @@
                     <button  type="reset" class="float-right btn btn-link">
                         <x-vaadin-rotate-left style="color: #374151; width:18px;height:18px;" />
                     </button>
+                    
                 </div>
           </form>
         </div>
