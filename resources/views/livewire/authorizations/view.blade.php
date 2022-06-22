@@ -23,26 +23,41 @@
 				</div>
 				
 				<div class="card-body">
-				<div class="table-responsive">
-					<table class="table table-bordered table-sm">
-						<thead class="thead">
+				<div class="table-responsive" id="table-movil">
+					<table class="table">
+						<thead>
 							<tr> 
-								<td></td>
 								<th>Client</th>
 								<th>Phone</th>
 								<th>Reason</th>
 								<th>Skin Type</th>
 								<th>Date</th>
+								<th></th>
+								<!--<th>dob</th>
+								<th>address</th>
+								<th>email</th>
+								<th>history</th>
+								<th>Date</th>-->
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($authorizations as $row)
 							<tr>
+								
+								<td data-title='Client'>{{ $row->client->fullname }}</td>
+								<td data-title='Phone'>{{ (isset($row->client->phone))? $row->client->phone : 'NA' }}</td>
+								<td data-title='Reason'>{{ implode(",",array_keys(json_decode($row->reason, true))) }}</td>
+								<td data-title='Skin Type'>{{ $row->skin_type }}</td>
+								<td data-title='Date'>{{ $row->proceeded_date }}</td>
 								<td width="80">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<!--<button type="button" class="btn btn-sm drop-actions-ellipsis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											<span class="fa fa-ellipsis-h text-info"></span>
+										</button>-->
+										<button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="drop-actions-button transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">
+											{{ __('Actions') }}
 										</button>
+						
 										<div class="dropdown-menu dropdown-menu-right">
 										<a class="dropdown-item" href="{{ route('clients_.edit',$row->client_id) }}"><i class="fa fa-edit text-muted"></i>edit user</a>
 										<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}"><i class="fa fa-download text-muted"></i> pdf</a>
@@ -51,11 +66,6 @@
 										</div>
 									</div>
 								</td>
-								<td>{{ $row->client->fullname }}</td>
-								<td>{{ (isset($row->client->phone))? $row->client->phone : 'NA' }}</td>
-								<td>{{ implode(",",array_keys(json_decode($row->reason, true))) }}</td>
-								<td>{{ $row->skin_type }}</td>
-								<td>{{ $row->proceeded_date }}</td>
 							@endforeach
 						</tbody>
 					</table>						
@@ -66,3 +76,36 @@
 		</div>
 	</div>
 </div>
+<style type="text/css">
+	@media only screen and (max-width:800px){
+		#table-movil tbody,#table-movil tr, #table-movil td{
+		 	display:block;	
+		}
+		#table-movil thead tr{
+		 	position:absolute;
+			top:-9999px;
+			left:-9999px;
+		}
+		#table-movil td{
+		 	position:relative;
+			padding-left:50%;
+			border:none;
+			border-bottom:1px solid #eee;
+		}
+		#table-movil td::before{
+			content:attr(data-title);
+			position: absolute;
+			left:6px;
+		}
+		#table-movil tr {
+                border-bottom: 1px solid #ccc;
+        }
+
+		.drop-actions{
+			position:absolute;
+			top:-2px;
+			left:-4px;
+		}
+
+	}
+</style>

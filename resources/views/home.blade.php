@@ -6,7 +6,8 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				<h5>Hi <strong>{{ Auth::user()->name }},
+				
+				<h5>Hi <strong><span role="img" aria-label="waving hand">👋</span> {{ Auth::user()->name }},
 					</strong> {{ __('You are logged in to ') }}{{ config('app.name', 'Laravel') }}
 				</h5>
 			</div>

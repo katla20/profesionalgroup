@@ -75,11 +75,8 @@
                 @endif
                 <div class="col-12">
                     <br/>
-                    <a href="{{ url('/clients') }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button" ><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></a>
+                    <!--<a href="{{ url('/clients') }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button" ><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></a>-->
                     <button  onclick="update()" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">{{ __('Update') }}</button>
-                    <button  type="reset" class="float-right btn btn-link">
-                        <x-vaadin-rotate-left style="color: #374151; width:18px;height:18px;" />
-                    </button>
                 </div>
           </form>
         </div>
