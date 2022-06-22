@@ -31,6 +31,7 @@
 							<tr> 
 								<td></td>
 								<th>Client</th>
+								<th>Phone</th>
 								<th>Reason</th>
 								<th>Skin Type</th>
 								<th>Date</th>
@@ -45,14 +46,15 @@
 											<span class="fa fa-ellipsis-h text-info"></span>
 										</button>
 										<div class="dropdown-menu dropdown-menu-right">
-										<!--<a data-toggle="modal" data-target="#updateModal" class="dropdown-item" wire:click="edit({{$row->id}})"><i class="fa fa-edit text-muted"></i></a>-->
-										<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}">[{{$row->id}}]<i class="fa fa-download text-muted"></i></a>
+										<a class="dropdown-item" href="{{ route('clients_.edit',$row->client_id) }}"><i class="fa fa-edit text-muted"></i>edit user</a>
+										<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}"><i class="fa fa-download text-muted"></i> pdf</a>
 										<hr class="dropdown-divider">					 
 										<a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center keychainify-checked"  onclick="confirm('Confirm Delete Authorization id {{$row->id}}? \nDeleted Authorizations cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i></a>   
 										</div>
 									</div>
 								</td>
 								<td>{{ $row->client->fullname }}</td>
+								<td>{{ (isset($row->client->phone))? $row->client->phone : 'NA' }}</td>
 								<td>{{ implode(",",array_keys(json_decode($row->reason, true))) }}</td>
 								<td>{{ $row->skin_type }}</td>
 								<td>{{ $row->proceeded_date }}</td>

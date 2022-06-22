@@ -30,15 +30,18 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 	});
 
 	Route::resource('clients_', App\Http\Livewire\Clients::class)->middleware('auth');
-	
 
-	Route::get('/registration', function () {
-		return view('livewire.registration-test');
+	Route::controller(App\Http\Livewire\Clients::class)->group(function () {
+		Route::put('clients_/update_/{clients_}', 'updatenew')->name('clients_.updatenew');
 	});
 
+	Route::resource('authorizations_', App\Http\Livewire\Authorizations::class)->middleware('auth');
+	
 	Route::controller(App\Http\Livewire\Authorizations::class)->group(function () {
 		Route::post('authorizations_/save', 'save')->name('authorizations_.save');
 		Route::get('authorizations_/pdf/{authorizations_}', 'pdf')->name('authorizations_.pdf');
 	});
 
-	Route::resource('authorizations_', App\Http\Livewire\Authorizations::class)->middleware('auth');
+	Route::get('/registration', function () {
+		return view('livewire.registration-test');
+	});

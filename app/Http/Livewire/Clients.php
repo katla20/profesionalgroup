@@ -1,18 +1,26 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Client;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class Clients extends Component
 {
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $email, $fullname, $ci, $occupation, $address, $citycode, $phone, $bob ,$knowabout;
+    public $selected_id, $keyWord, $email, $fullname, $ci, $occupation, $address, $citycode, $phone, $dob ,$knowabout;
     public $updateMode = false;
+
+	protected $rules = [
+		'dob' => 'required',
+		'email' => 'required',
+		'fullname' => 'required',
+	];
 
     public function render()
     {
@@ -26,7 +34,7 @@ class Clients extends Component
 						->orWhere('address', 'LIKE', $keyWord)
 						->orWhere('citycode', 'LIKE', $keyWord)
 						->orWhere('phone', 'LIKE', $keyWord)
-						->orWhere('bob', 'LIKE', $keyWord)
+						->orWhere('dob', 'LIKE', $keyWord)
 						->orWhere('knowabout', 'LIKE', $keyWord)
 						->paginate(10),
         ]);
@@ -51,7 +59,7 @@ class Clients extends Component
 		$this->address = null;
 		$this->citycode = null;
 		$this->phone = null;
-		$this->bob = null;
+		$this->dob = null;
 		$this->knowabout = null;
     }
 
@@ -61,7 +69,7 @@ class Clients extends Component
 		'email' => 'required',
 		'fullname' => 'required',
 		'phone' => 'required',
-		'bob' => 'required',
+		'dob' => 'required',
 		'knowabout' => 'required'
         ]);
 
@@ -84,51 +92,67 @@ class Clients extends Component
 
     public function edit($id)
     {
+		
         $record = Client::findOrFail($id);
-
-        $this->selected_id = $id; 
+		//dd($record);
+        /*$this->selected_id = $id; 
 		$this->email = $record-> email;
 		$this->fullname = $record-> fullname;
-		$this->ci = $record-> ci;
 		$this->occupation = $record-> occupation;
 		$this->address = $record-> address;
 		$this->citycode = $record-> citycode;
 		$this->phone = $record-> phone;
 		$this->bob = $record-> bob;
 		$this->knowabout = $record-> knowabout;
+		//$this->updateMode = true;*/
 		
+		return view('livewire.clients.update_wm',
+			['client'=>$record]
+		);
 		
-        $this->updateMode = true;
+        
     }
 
-    public function update()
+	public function updatenew(Request $request,$id){
+		//dd($request->all());
+		$record = Client::find($id);
+
+		$validator = Validator::make($request->all());
+
+		if ($validator->fails()) // on validator found any error 
+		{
+		   return redirect()->withErrors($validator)->withInput();
+		}
+
+		if($record){
+
+			$record->fill($request->all());
+			$record->save();
+			return $this->render();
+		}
+	}
+
+    public function update(Request $request,$id)
     {
-        $this->validate([
-		'email' => 'required',
-		'fullname' => 'required',
-		'phone' => 'required',
-		'bob' => 'required',
-		'knowabout' => 'required'
-        ]);
+		
+        $record = Client::find($id);
 
-        if ($this->selected_id) {
-			$record = Client::find($this->selected_id);
-            $record->update([ 
-			'email' => $this-> email,
-			'fullname' => $this-> fullname,
-			'ci' => $this-> ci,
-			'occupation' => $this-> occupation,
-			'address' => $this-> address,
-			'citycode' => $this-> citycode,
-			'phone' => $this-> phone,
-			'bob' => $this-> bob,
-			'knowabout' => $this-> knowabout
-			]);
+		$validator = Validator::make($request->all(),[
+			'dob' => 'required',
+			'email' => ['required', Rule::unique('clients')->ignore($id)],
+			'fullname' => 'required',
+		])->validate();
 
-            $this->resetInput();
-            $this->updateMode = false;
-			session()->flash('message', 'Client Successfully updated.');
-        }
+
+		if($record){
+
+			$record->fill($request->all());
+			$record->save();
+
+		}
+
+		return redirect('/authorizations');
+        
     }
 
     public function destroy($id)

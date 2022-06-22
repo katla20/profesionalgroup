@@ -39,15 +39,17 @@ class Authorizations extends Component
 		$keyWord = '%'.$this->keyWord .'%';
 
 		$authorization = Authorization::where('authorizations.user_id', '=', Auth::id())
-							   ->select('authorizations.*', 'clients.fullname')
+							   ->select('authorizations.*', 'clients.fullname','clients.phone','clients.email')
 							   ->join('clients', 'authorizations.client_id', '=', 'clients.id')
 							   ->where(function($query) {
 								$keyWord = '%'.$this->keyWord .'%';
 								$query->where('fullname', 'LIKE', $keyWord)
-									->orWhere('history', 'LIKE', $keyWord)
-									->orWhere('proceeded_date', 'LIKE', $keyWord)
-									->orWhere('skin_type', 'LIKE', $keyWord)
-									->orWhere('reason', 'LIKE', $keyWord);
+										->orWhere('phone', 'LIKE', $keyWord)
+										->orWhere('email', 'LIKE', $keyWord)
+										->orWhere('history', 'LIKE', $keyWord)
+										->orWhere('proceeded_date', 'LIKE', $keyWord)
+										->orWhere('skin_type', 'LIKE', $keyWord)
+										->orWhere('reason', 'LIKE', $keyWord);
 								})->latest()->paginate(10);
 			//dd($authorization2);//->toSql()
         
@@ -284,6 +286,7 @@ class Authorizations extends Component
 
     public function update()
     {
+		
         $this->validate([
 		'client_id' => 'required',
 		'user_id' => 'required',

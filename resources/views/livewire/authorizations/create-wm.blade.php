@@ -39,7 +39,7 @@
                     <label for="phonenumber" class="form-label">
                         <font style="vertical-align: inherit;">Number Phone</font>
                     </label>
-                  <input type="number" class="form-control"  wire:model="phonenumber" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}">
+                  <input type="number" class="form-control"  wire:model="phone" id="phone" name="phone" value="{{ old('phone') }}">
                 </div>
                 <div class="form-group col-12">
                     <label for="address" class="form-label">
