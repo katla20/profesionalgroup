@@ -32,7 +32,7 @@
     max-width: 100%;
     }
     .logo_base64 {
-    height:100px;
+    height:90px;
     width: 150px;
     }
     .nav-pg{
@@ -44,20 +44,19 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container nav-pg">
+                
                 @guest
-                  <h5> {{ config('app.name', 'Laravel') }}</h5>
+                  <!--<h5> {{ config('app.name', 'Laravel') }}</h5>-->
+                  <img class="logo_base64" src="{{ asset('/assets/MONOCROMATICOS/LOGOPG.PNG') }}" alt="cover image" >
                 @else
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img class="logo_base64" src="{{ Auth::user()->logo_base64 }}" />
+                    <img class="logo_base64" src="{{ asset('/assets/MONOCROMATICOS/LOGOPG.PNG') }}" alt="cover image" >
                 </a>
                 @endif
-                <!--<h4 class="text center m-2">
-                    @guest
-                            
+                    @guest   
                     @else
-                        Stylist {{ Auth::user()->name }}
-                    @endif	
-                </h4>-->
+                        <img class="logo_base64" src="{{ Auth::user()->logo_base64 }}" />
+                    @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

@@ -13,14 +13,14 @@
 			</div>
 			<div class="card-body">
 				<div class="row w-100">
-					<div class="col-md-3 m-3">
+					<div class="col-md-4 m-3">
                         <div class="card card-section border-info p-3 text-center" >
                             <a href="{{ route('authorizations_.create') }}" class="nav-link">
 								<h4>New Microblanding</h4>
                             </a>
                         </div>
 					</div>
-					<div class="col-md-3 m-3">
+					<div class="col-md-4 m-3">
                         <div class="card card-section border-info p-3 text-center" >
                             <a href="{{ url('/authorizations') }}" class="nav-link">
 								<h4>Search Microblanding</h4>
@@ -41,10 +41,12 @@
 </div>
 <style type="text/css">
     .card-section{
-		background-color: #08AEEA;
-		background-image: linear-gradient(0deg, #08AEEA 0%, #2AF598 100%);
+		background-color: #00DBDE;
+		background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 		border: 0px;
-
+	}
+	h4{
+		color:darkslategrey;
 	}
 	
 
