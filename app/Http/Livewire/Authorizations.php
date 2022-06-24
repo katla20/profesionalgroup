@@ -36,8 +36,7 @@ class Authorizations extends Component
 
     public function render()
     {
-		$keyWord = '%'.$this->keyWord .'%';
-
+		
 		$authorization = Authorization::where('authorizations.user_id', '=', Auth::id())
 							   ->select('authorizations.*', 'clients.fullname','clients.phone','clients.email')
 							   ->join('clients', 'authorizations.client_id', '=', 'clients.id')
@@ -97,8 +96,13 @@ class Authorizations extends Component
 			'other'=>'other'
 		];
 
+        $knowabout = [
+			'1'=>'Through a friend',
+			'2'=>'Social media',
+			'3'=>'Other'
+		];
 
-        return view('livewire.authorizations.create-wm', ['history' => $history]);
+        return view('livewire.authorizations.create-wm', ['history' => $history,'knowabout' => $knowabout]);
     }
 
 	public function save(Request $request){

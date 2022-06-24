@@ -57,11 +57,11 @@
                         <font style="vertical-align: inherit;">Know about us by</font>
                         <small class="text-muted">optional</small>
                     </label>
-                    <select class="form-control" name="knowabout" id="knowabout" value="{{ old('knowabout') ?? $client->knowabout}}">
+                    <select class="form-control" wire:model="knowabout" name="knowabout" id="knowabout">
                         <option value="">Choose...</option>
-                        <option value="1">Through a friend</option>
-                        <option value="0">Social media</option>
-                        <option value="2">Other</option>
+                        @foreach ($knowabout as $key => $val)
+                            <option value="{{ $key }}" @selected(old('knowabout') == $key)>{{$val}}</option>
+                        @endforeach
                     </select>
                 </div>
                 @if ($errors->any())

@@ -4,7 +4,7 @@
     <a href="{{ URL::previous() }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button"><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></i></a>
     <div class="row justify-content-center print">
         <a href="{{ route('authorizations_.pdf',$authDetails['id']) }}">
-            <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">{{ __('Print') }}</button>
+            <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide"><i class="fa fa-download text-muted"></i></button>
         </a>
     </div>   
     <div class="legend" style="margin-top: 25px;margin-bottom: 25px;">
@@ -243,7 +243,7 @@
     </div>
     <div class="row justify-content-center print">
         <a href="{{ route('authorizations_.pdf',$authDetails['id']) }}">
-            <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">{{ __('Print') }}</button>
+            <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide"><i class="fa fa-download text-muted"></i></button>
         </a>
     </div> 
 </div>

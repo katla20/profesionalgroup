@@ -59,11 +59,11 @@
                         <font style="vertical-align: inherit;">Know about us by</font>
                         <small class="text-muted">optional</small>
                     </label>
-                    <select class="form-control" wire:model="knowabout" name="knowabout" id="knowabout" value="{{ old('knowabout') }}">
+                    <select class="form-control" wire:model="knowabout" name="knowabout" id="knowabout">
                         <option value="">Choose...</option>
-                        <option value="1">Through a friend</option>
-                        <option value="0">Social media</option>
-                        <option value="2">Other</option>
+                        @foreach ($knowabout as $key => $val)
+                            <option value="{{ $key }}" @selected(old('knowabout') == $key)>{{$val}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <!--section 2-->
@@ -241,11 +241,14 @@
                 <div class="col-12">
                     <br/>
                     <a href="{{ url('/authorizations') }}" class="btn btn-link py-2 rounded px-4 tracking-wide" role="button" ><x-vaadin-chevron-circle-left-o style="color: #374151; width:22px;height:22px;" /></a>
-                    <button  onclick="signaturePadAdded()" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">{{ __('Register') }}</button>
+                    <button
+                        onclick="signaturePadAdded()"
+                        class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">
+                        {{ __('Register') }}
+                    </button>
                     <button  type="reset" class="float-right btn btn-link">
                         <x-vaadin-rotate-left style="color: #374151; width:18px;height:18px;" />
                     </button>
-                    
                 </div>
           </form>
         </div>

@@ -5,8 +5,12 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Client;
+use App\Models\Authorization;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class Clients extends Component
 {
@@ -24,20 +28,23 @@ class Clients extends Component
 
     public function render()
     {
-		$keyWord = '%'.$this->keyWord .'%';
+
+		$client = Authorization::where('authorizations.user_id', '=', Auth::id())
+							   ->select('clients.*')
+							   ->join('clients', 'authorizations.client_id', '=', 'clients.id')
+								->where(function($query) {
+								 $keyWord = '%'.$this->keyWord .'%';
+								 $query->where('fullname', 'LIKE', $keyWord)
+										 ->orWhere('phone', 'LIKE', $keyWord)
+										 ->orWhere('email', 'LIKE', $keyWord)
+										 ->orWhere('phone', 'LIKE', $keyWord)
+										 ->orWhere('dob', 'LIKE', $keyWord);
+								 })->latest()->paginate(10);
+
         return view('livewire.clients.view', [
-            'clients' => Client::latest()
-						->orWhere('email', 'LIKE', $keyWord)
-						->orWhere('fullname', 'LIKE', $keyWord)
-						->orWhere('ci', 'LIKE', $keyWord)
-						->orWhere('occupation', 'LIKE', $keyWord)
-						->orWhere('address', 'LIKE', $keyWord)
-						->orWhere('citycode', 'LIKE', $keyWord)
-						->orWhere('phone', 'LIKE', $keyWord)
-						->orWhere('dob', 'LIKE', $keyWord)
-						->orWhere('knowabout', 'LIKE', $keyWord)
-						->paginate(10),
+            'clients' => $client
         ]);
+
     }
 
 	public function create()
@@ -91,15 +98,16 @@ class Clients extends Component
     }
 
     public function edit($id)
-    {
-		
+    {	
         $record = Client::findOrFail($id);
-		
+		$knowabout = [
+			'1'=>'Through a friend',
+			'2'=>'Social media',
+			'3'=>'Other'
+		];
 		return view('livewire.clients.update_wm',
-			['client'=>$record]
+			['client'=>$record,'knowabout' => $knowabout]
 		);
-		
-        
     }
 
     public function update(Request $request,$id)

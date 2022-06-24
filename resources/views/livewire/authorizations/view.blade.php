@@ -43,7 +43,6 @@
 						<tbody>
 							@foreach($authorizations as $row)
 							<tr>
-								
 								<td data-title='Client'>{{ $row->client->fullname }}</td>
 								<td data-title='Phone'>{{ (isset($row->client->phone))? $row->client->phone : 'NA' }}</td>
 								<td data-title='Reason'>{{ implode(",",array_keys(json_decode($row->reason, true))) }}</td>
@@ -57,13 +56,12 @@
 										<button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="drop-actions-button transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide">
 											{{ __('Actions') }}
 										</button>
-						
 										<div class="dropdown-menu dropdown-menu-right">
-										<a class="dropdown-item" href="{{ route('clients_.edit',$row->client_id) }}"><i class="fa fa-edit text-muted"></i>edit user</a>
-										<a class="dropdown-item" href="{{ route('authorizations_.show',$row->id) }}"><i class="fa fa-eye text-muted"></i>show mic</a>
-										<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}"><i class="fa fa-download text-muted"></i> pdf</a>
-										<hr class="dropdown-divider">					 
-										<a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center keychainify-checked"  onclick="confirm('Confirm Delete Authorization id {{$row->id}}? \nDeleted Authorizations cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i></a>   
+											<a class="dropdown-item" href="{{ route('clients_.edit',$row->client_id) }}"><i class="fa fa-edit text-muted"></i> edit user</a>
+											<a class="dropdown-item" href="{{ route('authorizations_.show',$row->id) }}"><i class="fa fa-eye text-muted"></i> show doc</a>
+											<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}"><i class="fa fa-download text-muted"></i> pdf</a>
+											<hr class="dropdown-divider">					 
+											<a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center keychainify-checked"  onclick="confirm('Confirm Delete Authorization id {{$row->id}}? \nDeleted Authorizations cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i></a>   
 										</div>
 									</div>
 								</td>
@@ -101,6 +99,9 @@
 		#table-movil tr {
                 border-bottom: 1px solid #ccc;
         }
+
+		#icon-add{
+		}
 
 		.drop-actions{
 			position:absolute;
