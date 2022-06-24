@@ -43,20 +43,16 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container nav-pg">
-                
+            <div class="container nav-pg">               
                 @guest
                   <!--<h5> {{ config('app.name', 'Laravel') }}</h5>-->
-                  <img class="logo_base64" src="{{ asset('/assets/MONOCROMATICOS/LOGOPG.PNG') }}" alt="cover image" >
+                  <!--<img class="logo_base64" src="{{ public_path('\img\logo.png')}}" alt="profile Pic" >-->
+                  <img class="logo_base64" src="{{ asset('/img/logo.png')}}" alt="profile Pic" >
                 @else
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img class="logo_base64" src="{{ asset('/assets/MONOCROMATICOS/LOGOPG.PNG') }}" alt="cover image" >
+                    <img class="logo_base64" src="{{ Auth::user()->logo_base64 }}" />
                 </a>
                 @endif
-                    @guest   
-                    @else
-                        <img class="logo_base64" src="{{ Auth::user()->logo_base64 }}" />
-                    @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -71,7 +67,6 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                
                         @else
                                 <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

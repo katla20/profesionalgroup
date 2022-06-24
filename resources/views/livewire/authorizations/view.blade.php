@@ -60,6 +60,7 @@
 						
 										<div class="dropdown-menu dropdown-menu-right">
 										<a class="dropdown-item" href="{{ route('clients_.edit',$row->client_id) }}"><i class="fa fa-edit text-muted"></i>edit user</a>
+										<a class="dropdown-item" href="{{ route('authorizations_.show',$row->id) }}"><i class="fa fa-eye text-muted"></i>show mic</a>
 										<a class="dropdown-item" href="{{ route('authorizations_.pdf',$row->id) }}"><i class="fa fa-download text-muted"></i> pdf</a>
 										<hr class="dropdown-divider">					 
 										<a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center keychainify-checked"  onclick="confirm('Confirm Delete Authorization id {{$row->id}}? \nDeleted Authorizations cannot be recovered!')||event.stopImmediatePropagation()" wire:click="destroy({{$row->id}})"><i class="fa fa-trash"></i></a>   

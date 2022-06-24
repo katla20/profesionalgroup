@@ -6,7 +6,6 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header">
-				
 				<h5>Hi <strong><span role="img" aria-label="waving hand">👋</span> {{ Auth::user()->name }},
 					</strong> {{ __('You are logged in to ') }}{{ config('app.name', 'Laravel') }}
 				</h5>
@@ -41,8 +40,7 @@
 </div>
 <style type="text/css">
     .card-section{
-		background-color: #00DBDE;
-		background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+		background-color: #c5c6c6;
 		border: 0px;
 	}
 	h4{

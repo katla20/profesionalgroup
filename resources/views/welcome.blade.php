@@ -9,11 +9,10 @@
             <div class="card-body">
               <h5>  
                 @guest
-                    
                     Please contact admin to get your Login Credentials or click "Login" to go to your Dashboard.
-                    
                 @else
-                        Hi {{ Auth::user()->name }}, Welcome back to {{ config('app.name', 'Laravel') }}.
+                        Hi <span role="img" aria-label="waving hand">👋</span> {{ Auth::user()->name }}, Welcome back to {{ config('app.name', 'Laravel') }}
+                        <a class="navbar-brand" href="{{ url('/home') }}">{{__(' Go to Options')}}</a>
                 @endif	
 				</h5>				
 			</div>

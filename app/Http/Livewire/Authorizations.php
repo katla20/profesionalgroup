@@ -61,7 +61,8 @@ class Authorizations extends Component
 	public function show($id)
     {
 	   // dd($id);
-		return view('livewire.authorizations.show',['authorizations_' => $id]);
+	   $authDetails = $this->showAuthorization($id);
+	   return view('livewire.authorizations.show',['authDetails' => $authDetails]);
 	}
 
 	public function create()
@@ -124,7 +125,9 @@ class Authorizations extends Component
 			return redirect()->back()->withErrors(['error' => $e->getMessage()]);
 		}
 
-		return $this->pdf(5);
+		return redirect('/authorizations');
+		
+
 	}
 
 	public function saveAuthorization($request,$client){
@@ -170,12 +173,7 @@ class Authorizations extends Component
 		
 	}
 
-	public function pdf($authorization){
-
-		
-	    $fileName = "microblanding-".$authorization;
-		$pdf = app('dompdf.wrapper');
-		$pdf->setOptions(['setBasePath'=> public_path()]);
+	public function showAuthorization($authorization){
 
 		$authDetails=Authorization::where('id', '=', $authorization)->with(['client','user'])->first()->toArray();//->get();
 
@@ -185,13 +183,23 @@ class Authorizations extends Component
 		$authDetails['reason_string'] = implode(",",array_keys(json_decode($authDetails['reason'], true)));
 		$authDetails['reason'] = json_decode($authDetails['reason']);
 		$authDetails['history'] = json_decode($authDetails['history']);
-
-
+        
 		//dd($authDetails);
+		return $authDetails;
+	}
+
+	public function pdf($authorization){
+
+	    $fileName = "microblanding-".$authorization;
+
+		$pdf = app('dompdf.wrapper');
+		$pdf->setOptions(['setBasePath'=> public_path()]);
+
+		$authDetails = $this->showAuthorization($authorization);
 
 		$pdf->loadView('livewire.authorizations.pdf', compact('authDetails'));
-	    return $pdf->stream($fileName.'.pdf');
-		//return $pdf->download($fileName.'.pdf');
+	    //$pdf->stream($fileName.'.pdf');
+		return $pdf->download($fileName.'.pdf');
 	}
 	
     public function cancel()
