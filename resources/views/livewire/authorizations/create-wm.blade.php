@@ -177,7 +177,9 @@
                 </div>
                 <hr class="my-8">
                 <h4>Color used:</h4>
+               {{--request()->is('fullname')--}}
                 <div class="form-group col-12">
+                   {{--@includeWhen($boolean, 'view.name', ['some' => 'data'])--}} 
                     <label for="color_eyebrows" class="form-label"><font style="vertical-align: inherit;">Eyebrows</font></label>
                     <input type="text" class="form-control" id="color_eyebrows" name="color_eyebrows" wire:model="color_eyebrows" value="{{ old('color_eyebrows') }}">
                 </div>
