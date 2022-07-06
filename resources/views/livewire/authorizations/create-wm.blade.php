@@ -223,21 +223,19 @@
                         <canvas id="signature-canvas"
                         style="border: 1px dashed red; width: 450px; height: 150px"></canvas>
                     </div>
+                    <input type="hidden" name="signature_client" id="signature_client">
                 </div>
                 <div class="col-12">
                     @error('signature_client') <span class="error text-danger">{{ $message }}</span> @enderror
                     <div class="">
                         <button onclick="signaturePadClear()"><i class="fa fa-trash"></i></button>
                     </div>
-                    
-                    <div class="form-check">
-                        <br/>
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" name="invalidCheck" required>
-                        <input type="hidden" name="signature_client" id="signature_client">
-                        <label class="form-check-label" for="invalidCheck">Agree to terms and conditions</label>
-                        <div class="invalid-feedback">
-                                You must agree before submitting.
-                        </div>
+                    <br/>
+                    <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Read Terms
+                    </button>
+                    <div class="collapse" id="collapseExample">
+                        @include('livewire.terms')
                     </div>
                 </div>
                 <div class="col-12">
@@ -256,11 +254,13 @@
         </div>
     </div>
 </div>
-<style>
-
+<style type="text/css">
 label{
     font-size: 1.075em;
     color:darkslategrey;
+}
+#label_image_release{
+    margin-left: 3.075em;
 }
 
 </style>

@@ -33,11 +33,11 @@ return new class extends Migration
             $table->string('color_touchup')->nullable();
             $table->string('color_other')->nullable();
             $table->text('color_observation')->nullable();
-
             $table->json('history');
             $table->json('history_specify')->nullable();
             $table->json('reason');
             $table->string('cost_treatment');
+            $table->boolean('image_release');
            
             $table->timestamps();
         });

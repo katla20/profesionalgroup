@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(2)->create();
+        /* \App\Models\User::factory(2)->create();
 
-         //\App\Models\Client::factory(2)->create();
+         \App\Models\Client::factory(2)->create();
 
-         //$this->call(AuthorizationsTableSeeder::class);
+         $this->call(AuthorizationsTableSeeder::class);*/
     }
 }

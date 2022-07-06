@@ -322,6 +322,7 @@ table {
             </div>
         </div>
         <hr>
+        @isset($authDetails['imageRelease'])
         <div style=margin-bottom:5px,margin-top:10px">
             <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
         </div>
@@ -339,7 +340,32 @@ table {
                 I HAVE BEEN ADVISED OF THE PRODUCTS THAT I NEED USED WHILE GOING UNDER TREATMENT.
                 I HEREBY GIVE MY VOLUNTARY CONSENT TO HAVE THIS TREATMENT PERFORMED ON ME.
             </p>
+            <p>
+                I <span class="boldfont">{{$authDetails['client']['fullname']}}</span> hereby consent to and authorize the use by <span class="boldfont">{{$authDetails['user']['name']}}</span>, of any and all photographs, video, voice recordings, or other media taken of me including derivative works thereof (collectively, the "images"), and any reproduction of them in any form in any media whatsoever, whether now known or hereafter created, throughout the world in perpetuity.
+                I hereby release and discharge {{$authDetails['user']['name']}}, its trustees, officers, employees, licensees. And affiliates from ary and all claims, actions, suits or demands of any kind nature whatsoever, in connection with the use of images and the reproduction thereo as aforesaid.
+                I understand and agree that, {{$authDetails['user']['name']}} will be the exclusive owner of all rights, including, but not limited to, all copyrights, in and to the images in whole or part, throughout the universe, in perpetuity, in any medium now known or hereafter developed, and to license other to so use them in any manner {{$authDetails['user']['name']}}, may determine in its sole discretion, without any obligation to me.
+                I hereby waive any right that may have to inspect and/or approve the use of the images or any reproductions thereof, by {{$authDetails['user']['name']}
+            </p>
         </div>
+        <div>
+            <div>
+                <ul>
+                    <li>
+                        <span>{{ __('CLIENT NAME') }}</span>
+                        <img class="signature" src="{{$authDetails['client']['fullname']}}" />
+                    </li>
+                    <li> 
+                        <span>{{ __('SIGNATURE') }}</span>
+                        <img class="signature" src="{{$authDetails['signature_client']}}" />
+                    </li>
+                    <li>
+                        <span>{{ __('DATE') }}:</span>
+                        <span class="legend">{{ date('d-M-y', strtotime($authDetails['proceeded_date'])) }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        @endisset
     </div>   
 </body>
 </html>

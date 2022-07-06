@@ -24,21 +24,44 @@
 	 @livewireStyles
 </head>
 <style>
-    img {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    height: auto;
-    max-width: 100%;
-    }
-    .logo_base64 {
-    height:90px;
-    width: 150px;
-    }
-    .nav-pg{
-        max-height: 8%;
-        max-width: 50%;
-    }
+img {
+height: 100%;
+width: 100%;
+object-fit: contain;
+height: auto;
+max-width: 100%;
+}
+.logo_base64 {
+height:90px;
+width: 150px;
+}
+.nav-pg{
+    max-height: 8%;
+    max-width: 50%;
+}
+
+.modal-contenido{
+  background-color:aqua;
+  width:300px;
+  padding: 10px 20px;
+  margin: 20% auto;
+  position: relative;
+}
+.modal{
+  background-color: rgba(0,0,0,.8);
+  position:fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  transition: all 1s;
+}
+#miModal:target{
+  opacity:1;
+  pointer-events:auto;
+}
 </style>
 <body>
     <div id="app">
@@ -97,10 +120,10 @@
         </main>
     </div>
     @livewireScripts
-<script type="text/javascript">
-	window.livewire.on('closeModal', () => {
-		$('#createDataModal').modal('hide');
-	});
-</script>
+    <script type="text/javascript">
+        window.livewire.on('closeModal', () => {
+            $('#createDataModal').modal('hide');
+        });
+    </script>
 </body>
 </html>

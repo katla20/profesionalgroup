@@ -30,7 +30,8 @@ class Authorization extends Model
         'color_eyerline',
         'color_lips',
         'color_other',
-        'cost_treatment'
+        'cost_treatment',
+        'image_release'
     ];
 	
     /**

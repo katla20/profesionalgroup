@@ -33,6 +33,7 @@ class AuthorizationsTableSeeder extends Seeder
             'color_other'=> null,
             'color_observation'=> null,
             'cost_treatment'=>'200',
+            'image_release' => true,
             'created_at'=>now(),
         ]);
     }

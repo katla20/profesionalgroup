@@ -15,7 +15,8 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
-        "nesbot/carbon": "^2.58"
+        "nesbot/carbon": "^2.58",
+        "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

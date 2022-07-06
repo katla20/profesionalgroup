@@ -17,11 +17,13 @@ class Authorizations extends Component
     use WithPagination;
 
 	protected $paginationTheme = 'bootstrap';
-    public $selected_id, $keyWord, $client_id, $user_id, $proceeded, 
+    public $selected_id, $keyWord, $client_id, $user_id, $proceeded, $imageRelease,
 	$proceeded_date, $signature_client, $signature_date, $skin_type, $cost_treatment,
 	$history, $history_specify,$reason, $color_observation, $color_eyebrows, $color_eyerline, $color_lips, $color_other, $color_touchup ;
 	public $email, $fullname, $ci, $occupation, $address, $citycode, $phone, $dob ,$knowabout;
+
     public $updateMode = false;
+
 
 	protected $rules = [
 				'skin_type' => 'required',
@@ -33,7 +35,7 @@ class Authorizations extends Component
 				'signature_client'=>'required',
 				'cost_treatment'=>'required'
 			];
-
+	
     public function render()
     {
 		
@@ -106,6 +108,8 @@ class Authorizations extends Component
     }
 
 	public function save(Request $request){
+		//dd($request);
+
 		Validator::make($request->all(), [
 			'skin_type' => 'required',
 			'reason' => 'required',
@@ -131,7 +135,6 @@ class Authorizations extends Component
 
 		return redirect('/authorizations');
 		
-
 	}
 
 	public function saveAuthorization($request,$client){
@@ -154,7 +157,8 @@ class Authorizations extends Component
 			'color_eyerline' => $request->color_eyerline,
 			'color_eyebrows' => $request->color_eyebrows,
 			'cost_treatment' =>  $request->cost_treatment,
-			'created_at' =>Carbon::now()->format('Y/m/d')
+			'created_at' =>Carbon::now()->format('Y/m/d'),
+			'image_release' => isset($request->image_release)?true:false
 		];
 
 		//dd($authorization);
