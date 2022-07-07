@@ -32,6 +32,7 @@
 								<th>Reason</th>
 								<th>Skin Type</th>
 								<th>Date</th>
+								<th>Image Release</th>
 								<th></th>
 								<!--<th>dob</th>
 								<th>address</th>
@@ -44,10 +45,11 @@
 							@foreach($authorizations as $row)
 							<tr>
 								<td data-title='Client'>{{ $row->client->fullname }}</td>
-								<td data-title='Phone'>{{ (isset($row->client->phone))? $row->client->phone : 'NA' }}</td>
+								<td data-title='Phone'>{{ ($row->client->phone)? $row->client->phone : 'NA' }}</td>
 								<td data-title='Reason'>{{ implode(",",array_keys(json_decode($row->reason, true))) }}</td>
 								<td data-title='Skin Type'>{{ $row->skin_type }}</td>
 								<td data-title='Date'>{{ $row->proceeded_date }}</td>
+								<td data-title='Image Release'>{{($row->image_release)? '👍' : '👎' }}</td>
 								<td width="80">
 									<div class="btn-group">
 										<!--<button type="button" class="btn btn-sm drop-actions-ellipsis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

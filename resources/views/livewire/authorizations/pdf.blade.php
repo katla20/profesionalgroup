@@ -322,7 +322,7 @@ table {
             </div>
         </div>
         <hr>
-        @isset($authDetails['image_release'])
+        @if($authDetails['image_release'])
         <div style=margin-bottom:5px,margin-top:10px">
             <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
         </div>
@@ -348,7 +348,7 @@ table {
                 </ul>
             </div>
         </div>
-        @endisset
+        @endif
     </div>   
 </body>
 </html>

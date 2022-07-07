@@ -221,7 +221,7 @@
         </div>
     </div>
     <hr>
-    @isset($authDetails['image_release'])
+    @if($authDetails['image_release'])
     <div style=margin-bottom:10px,margin-top:10px">
         </br>
         <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
@@ -250,7 +250,7 @@
             </ul>
         </div>
     </div>
-    @endisset
+    @endif
     <div class="row justify-content-center print">
         <a href="{{ route('authorizations_.pdf',$authDetails['id']) }}">
             <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide"><i class="fa fa-download text-muted"></i></button>
