@@ -204,6 +204,7 @@ class Authorizations extends Component
 		$pdf->setOptions(['setBasePath'=> public_path()]);
 
 		$authDetails = $this->showAuthorization($authorization);
+		//dd($authDetails);
 
 		$pdf->loadView('livewire.authorizations.pdf', compact('authDetails'));
 	    //$pdf->stream($fileName.'.pdf');

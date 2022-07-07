@@ -215,8 +215,16 @@
                     </div>
                     @error('cost_treatment') <span class="error text-danger">{{ $message }}</span> @enderror
                 </div>
+                <div class="col-12 mb-2">
+                    <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        [Read image release terms]
+                    </button>
+                    <div class="collapse" id="collapseExample">
+                        @include('livewire.terms')
+                    </div>
+                </div>
                 <div class="col-12">
-                    <small class="text-muted">Client's signature</small>
+                    <small>Client's signature</small>
                 </div>
                 <div class="col-12">
                     <div class="signature mb-2" style="width: 450px; height: 150px;">
@@ -231,12 +239,6 @@
                         <button onclick="signaturePadClear()"><i class="fa fa-trash"></i></button>
                     </div>
                     <br/>
-                    <button type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Read Terms
-                    </button>
-                    <div class="collapse" id="collapseExample">
-                        @include('livewire.terms')
-                    </div>
                 </div>
                 <div class="col-12">
                     <br/>

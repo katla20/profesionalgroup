@@ -221,26 +221,36 @@
         </div>
     </div>
     <hr>
+    @isset($authDetails['image_release'])
     <div style=margin-bottom:10px,margin-top:10px">
         </br>
         <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
         </br>
     </div>
     <div class="div_terms">
-        <p style="text_terms">
-            I <span class="boldfont">{{$authDetails['client']['fullname']}}</span> HEREBY GIVE MY CONSENT TO <span class="boldfont">{{$authDetails['user']['name']}}</span>
-            TO PERFORM <span class="boldfont">{{$authDetails['reason_string']}}</span> I ACKNOWLEDGE THIS TECHINE AND THE ALTERNATIVES HAS BEEN FULLY EXPLAINED TO ME.
-            I HAVE FULLY DISCLOSED MY MEDICAL HISTORY AND COMPLEELY ANSWERED ALL SPECIFIC HEALTH QUESTIONS.
-            I UNDERSTAND THIS TECHNIQUE MAY INVOIVE CERTAIN RISKS OF MINOR OR TEMPORARY BRUISING REDNESS SWELLING OF THE SKIN, AND THE POSSIBILITIES OF A SENSITIVE REACTION.
-            ALL THE RISKS HAVE BEEN EXPLAINED TO ME AND I ACCEPT THEM.
-            I AM AWARE THE RESULT ACHIEVED BY THIS TREATMENT MAY VARY FROM PERSON TO PERSON, AND I ACKNOWLEDGE THAT NO PROMISES OR GUARANTEES HAVE BEEN MADE TO ME
-            AS A RESULT OF THE TREATMENT.
-            I HAD THE OPPORTUNITY TO ASK QUESTIONS AND MY QUESTIONS HAVE BEEN FULLY ANSWERED TO ME IN FULL SATISFACTION.
-            I HAVE BEEN ADVISED OF THE PRODUCTS THAT I NEED USED WHLIE GOING UNDER TREATMENT.
-            I HAVE BEEN ADVISED OF THE PRODUCTS THAT I NEED USED WHILE GOING UNDER TREATMENT.
-            I HEREBY GIVE MY VOLUNTARY CONSENT TO HAVE THIS TREATMENT PERFORMED ON ME.
+        <p>
+            I <span class="boldfont">{{$authDetails['client']['fullname']}}</span> hereby consent to and authorize the use by <span class="boldfont">{{$authDetails['user']['name']}}</span>, of any and all photographs, video, voice recordings, or other media taken of me including derivative works thereof (collectively, the "images"), and any reproduction of them in any form in any media whatsoever, whether now known or hereafter created, throughout the world in perpetuity.
+            I hereby release and discharge {{$authDetails['user']['name']}}, its trustees, officers, employees, licensees. And affiliates from ary and all claims, actions, suits or demands of any kind nature whatsoever, in connection with the use of images and the reproduction thereo as aforesaid.
+            I understand and agree that, {{$authDetails['user']['name']}} will be the exclusive owner of all rights, including, but not limited to, all copyrights, in and to the images in whole or part, throughout the universe, in perpetuity, in any medium now known or hereafter developed, and to license other to so use them in any manner {{$authDetails['user']['name']}}, may determine in its sole discretion, without any obligation to me.
+            I hereby waive any right that may have to inspect and/or approve the use of the images or any reproductions thereof, by {{$authDetails['user']['name']}}
         </p>
     </div>
+    <div>
+        <div>
+            <ul>
+                <li> 
+                    <span>{{ __('SIGNATURE') }}</span>
+                    <img class="signature" src="{{$authDetails['signature_client']}}" />
+                    <span class="legend boldfont m-2">{{$authDetails['client']['fullname']}}</span>
+                </li>
+                <li>
+                    <span>{{ __('DATE') }}:</span>
+                    <span class="legend boldfont">{{ date('d-M-y', strtotime($authDetails['proceeded_date'])) }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    @endisset
     <div class="row justify-content-center print">
         <a href="{{ route('authorizations_.pdf',$authDetails['id']) }}">
             <button type="button" class="transition bg-keppel py-2 rounded px-4 text-grey font-bold tracking-wide"><i class="fa fa-download text-muted"></i></button>
@@ -248,7 +258,7 @@
     </div> 
 </div>
 <style type="text/css">
-    span{
+    span,p{
         text-transform: uppercase;
     }
     ul {

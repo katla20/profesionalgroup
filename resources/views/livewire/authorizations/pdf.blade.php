@@ -37,7 +37,7 @@ table {
 }
 
 
-    span{
+    span,p{
         text-transform: uppercase;
         font-size: 0.6em;
         font-family: 'dejavu sans'
@@ -75,7 +75,7 @@ table {
         text-decoration: underline;
         text-transform: uppercase;
         font-weight: 800;
-        font-size: 0.7em;
+        font-size: 1em;
 
     }
     
@@ -322,40 +322,23 @@ table {
             </div>
         </div>
         <hr>
-        @isset($authDetails['imageRelease'])
+        @isset($authDetails['image_release'])
         <div style=margin-bottom:5px,margin-top:10px">
             <center><strong><span class="legend">{{ __('IMAGE RELEASE FORM') }}</span></strong></center>
         </div>
         <div style="margin-bottom: 10px" class="div_terms">
-            <p style="">
-                I <span class="boldfont">{{$authDetails['client']['fullname']}}</span> HEREBY GIVE MY CONSENT TO <span class="boldfont">{{$authDetails['user']['name']}}</span>
-                TO PERFORM <span class="boldfont">{{$authDetails['reason_string']}}</span> I ACKNOWLEDGE THIS TECHINE AND THE ALTERNATIVES HAS BEEN FULLY EXPLAINED TO ME.
-                I HAVE FULLY DISCLOSED MY MEDICAL HISTORY AND COMPLEELY ANSWERED ALL SPECIFIC HEALTH QUESTIONS.
-                I UNDERSTAND THIS TECHNIQUE MAY INVOIVE CERTAIN RISKS OF MINOR OR TEMPORARY BRUISING REDNESS SWELLING OF THE SKIN, AND THE POSSIBILITIES OF A SENSITIVE REACTION.
-                ALL THE RISKS HAVE BEEN EXPLAINED TO ME AND I ACCEPT THEM.
-                I AM AWARE THE RESULT ACHIEVED BY THIS TREATMENT MAY VARY FROM PERSON TO PERSON, AND I ACKNOWLEDGE THAT NO PROMISES OR GUARANTEES HAVE BEEN MADE TO ME
-                AS A RESULT OF THE TREATMENT.
-                I HAD THE OPPORTUNITY TO ASK QUESTIONS AND MY QUESTIONS HAVE BEEN FULLY ANSWERED TO ME IN FULL SATISFACTION.
-                I HAVE BEEN ADVISED OF THE PRODUCTS THAT I NEED USED WHLIE GOING UNDER TREATMENT.
-                I HAVE BEEN ADVISED OF THE PRODUCTS THAT I NEED USED WHILE GOING UNDER TREATMENT.
-                I HEREBY GIVE MY VOLUNTARY CONSENT TO HAVE THIS TREATMENT PERFORMED ON ME.
-            </p>
-            <p>
+            <p id="">
                 I <span class="boldfont">{{$authDetails['client']['fullname']}}</span> hereby consent to and authorize the use by <span class="boldfont">{{$authDetails['user']['name']}}</span>, of any and all photographs, video, voice recordings, or other media taken of me including derivative works thereof (collectively, the "images"), and any reproduction of them in any form in any media whatsoever, whether now known or hereafter created, throughout the world in perpetuity.
                 I hereby release and discharge {{$authDetails['user']['name']}}, its trustees, officers, employees, licensees. And affiliates from ary and all claims, actions, suits or demands of any kind nature whatsoever, in connection with the use of images and the reproduction thereo as aforesaid.
                 I understand and agree that, {{$authDetails['user']['name']}} will be the exclusive owner of all rights, including, but not limited to, all copyrights, in and to the images in whole or part, throughout the universe, in perpetuity, in any medium now known or hereafter developed, and to license other to so use them in any manner {{$authDetails['user']['name']}}, may determine in its sole discretion, without any obligation to me.
-                I hereby waive any right that may have to inspect and/or approve the use of the images or any reproductions thereof, by {{$authDetails['user']['name']}
+                I hereby waive any right that may have to inspect and/or approve the use of the images or any reproductions thereof, by {{$authDetails['user']['name']}}
             </p>
         </div>
         <div>
             <div>
                 <ul>
-                    <li>
-                        <span>{{ __('CLIENT NAME') }}</span>
-                        <img class="signature" src="{{$authDetails['client']['fullname']}}" />
-                    </li>
                     <li> 
-                        <span>{{ __('SIGNATURE') }}</span>
+                        <span>{{ __('SIGNATURE BY ')}}<span class="boldfont">{{$authDetails['client']['fullname']}}</span></span>
                         <img class="signature" src="{{$authDetails['signature_client']}}" />
                     </li>
                     <li>
