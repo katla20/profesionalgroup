@@ -7,7 +7,7 @@
 		<div class="card">
 			<div class="card-header">
 				<h5>Hi <strong><span role="img" aria-label="waving hand">👋</span> {{ Auth::user()->name }},
-					</strong> {{ __('You are logged in to ') }}{{ config('app.name', 'Laravel') }}
+					</strong> {{ __('You are logged in to ') }}{{ config('app.name', 'Laravel') }} 💄
 				</h5>
 			</div>
 			<div class="card-body">
@@ -15,21 +15,21 @@
 					<div class="col-md-4 m-3">
                         <div class="card card-section border-info p-3 text-center" >
                             <a href="{{ route('authorizations_.create') }}" class="nav-link">
-								<h4>New Microblanding</h4>
+								<h4>👄 New Microblanding</h4>
                             </a>
                         </div>
 					</div>
 					<div class="col-md-4 m-3">
                         <div class="card card-section border-info p-3 text-center" >
                             <a href="{{ url('/authorizations') }}" class="nav-link">
-								<h4>Search Microblanding</h4>
+								<h4>🔎 Search Microblanding</h4>
                             </a>
                         </div>
 					</div>
                     <div class="col-md-3 m-3">
                         <div class="card card-section border-info text-info p-3 text-center" >
 							<a href="{{ url('/clients') }}" class="nav-link">
-                                <h4>Search Client</h4>
+                                <h4>🔎 Search Client</h4>
                             </a> 
                         </div>
 					</div>

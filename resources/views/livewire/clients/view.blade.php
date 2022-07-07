@@ -13,7 +13,7 @@
 							<code><h5>{{ now()->format('H:i:s') }} UTC</h5></code>
 						</div>-->
 						@if (session()->has('message'))
-						<div wire:poll.4s class="btn btn-sm btn-success" style="margin-top:0px; margin-bottom:0px;"> {{ session('message') }} </div>
+							@include('flash-message')
 						@endif
 						<div>
 							<div class="input-group">
@@ -42,7 +42,7 @@
 							</thead>
 						<tbody>
 							@foreach($clients as $row)
-							<tr>
+							<tr :wire:key="{{$loop->index}}">
 								<td data-title='Email'>{{ $row->email }}</td>
 								<td data-title='Fullname'>{{ $row->fullname }}</td>
 								<td data-title='Phone'>{{ (isset($row->phone))? $row->phone : 'NA' }}</td>

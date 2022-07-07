@@ -112,7 +112,6 @@ width: 150px;
                 </div>
             </div>
         </nav>
-
         <main class="py-2">
             @yield('content')
         </main>

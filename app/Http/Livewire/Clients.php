@@ -30,8 +30,9 @@ class Clients extends Component
     {
 
 		$client = Authorization::where('authorizations.user_id', '=', Auth::id())
-							   ->select('clients.*')
-							   ->join('clients', 'authorizations.client_id', '=', 'clients.id')
+								->where('clients.delete', '=', false)
+							   	->select('clients.*')
+							   	->join('clients', 'authorizations.client_id', '=', 'clients.id')
 								->where(function($query) {
 								 $keyWord = '%'.$this->keyWord .'%';
 								 $query->where('fullname', 'LIKE', $keyWord)
@@ -137,7 +138,20 @@ class Clients extends Component
     {
         if ($id) {
             $record = Client::where('id', $id);
-            $record->delete();
+			$auth=Authorization::where('client_id', '=', $id)->count();
+			if($auth){
+				session()->flash('message', 'the client has a procedure performed');
+				return back();
+			}
+
+
+			$record->update([ 
+				'delete' => true,
+				'updated_at' => now()
+			]);
+			session()->flash('message', 'client delete.');
+			return back();
+            //$record->delete();
         }
     }
 }

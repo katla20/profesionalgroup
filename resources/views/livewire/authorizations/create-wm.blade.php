@@ -9,7 +9,7 @@
             <hr class="my-8">
         </div>
         <div class="col-md-8 offset-md 2">
-            <h4>Contact details:</h4>
+            <h4>👸 Contact details:</h4>
                 <form method="POST" id="auth_form" action="{{ route('authorizations_.save') }}">
                     @csrf
                 <div class="form-group col-md-6">
@@ -176,7 +176,7 @@
                     </div>
                 </div>
                 <hr class="my-8">
-                <h4>Color used:</h4>
+                <h4>🎨 Color used:</h4>
                {{--request()->is('fullname')--}}
                 <div class="form-group col-12">
                    {{--@includeWhen($boolean, 'view.name', ['some' => 'data'])--}} 
@@ -209,7 +209,7 @@
                     </label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <span class="input-group-text" id="basic-addon1">💰</span>
                         </div>
                         <input type="text" class="form-control" placeholder="Cost Treatment" aria-label="Cost Treatment" id="cost_treatment" name="cost_treatment">
                     </div>

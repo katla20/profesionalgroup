@@ -37,7 +37,8 @@ return new class extends Migration
             $table->json('history_specify')->nullable();
             $table->json('reason');
             $table->string('cost_treatment');
-            $table->boolean('image_release');
+            $table->boolean('image_release')->default(false);
+            $table->boolean('delete')->default(false);
            
             $table->timestamps();
         });

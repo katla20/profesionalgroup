@@ -40,9 +40,10 @@ class Authorizations extends Component
     {
 		
 		$authorization = Authorization::where('authorizations.user_id', '=', Auth::id())
-							   ->select('authorizations.*', 'clients.fullname','clients.phone','clients.email')
-							   ->join('clients', 'authorizations.client_id', '=', 'clients.id')
-							   ->where(function($query) {
+								->where('authorizations.delete', '=',false)
+							   	->select('authorizations.*', 'clients.fullname','clients.phone','clients.email')
+							   	->join('clients', 'authorizations.client_id', '=', 'clients.id')
+							  	->where(function($query) {
 								$keyWord = '%'.$this->keyWord .'%';
 								$query->where('fullname', 'LIKE', $keyWord)
 										->orWhere('phone', 'LIKE', $keyWord)
@@ -343,7 +344,12 @@ class Authorizations extends Component
     {
         if ($id) {
             $record = Authorization::where('id', $id);
-            $record->delete();
+			$record->update([ 
+				'delete' => true,
+				'updated_at' =>  now()
+			]);
+
+            //$record->delete();
         }
     }
 }
